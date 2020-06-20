@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Locations</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div>
+    <p>First Name:
+    <span th:text="${user.firstName}"></span>
+    </p>
+    <br />
+    <p>Last Name:
+    <span th:text="${user.lastName}"></span>
+    </p>
+    <br />
+    <p>Email:
+    <span th:text="${user.email}"></span>
+    </p>
+    <br />
+    <p>Phone:
+    <span th:text="${user.phone}"></span>
+    </p>
+    <br />
+    <p>Password:
+    <span th:text="${user.password}"></span>
+    </p>
+    <br />
+    <p>EmailCheck:
+    <span th:text="${emailCheck}"></span>
+    </p>
+    </div>
+   </body>
+</html>
