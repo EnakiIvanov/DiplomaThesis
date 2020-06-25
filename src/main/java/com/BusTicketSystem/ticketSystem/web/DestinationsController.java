@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.BusTicketSystem.ticketSystem.logic.Destinations;
-import com.BusTicketSystem.ticketSystem.logic.DestinationsService;
+import com.BusTicketSystem.ticketSystem.logic.destinations.Destinations;
+import com.BusTicketSystem.ticketSystem.logic.destinations.DestinationsService;
+import com.BusTicketSystem.ticketSystem.logic.user.User;
 
 @Controller
 public class DestinationsController {
@@ -20,8 +21,10 @@ public class DestinationsController {
 	
 	@GetMapping("/destinations")
 	public String destinations(Model model, HttpSession session) {
+		User user = User.class.cast(session.getAttribute("user"));
 		destService.updateTable(session);
 		
+		model.addAttribute("user", user);
 		model.addAttribute("allDestinations", destService.getAllDestinations());
 		model.addAttribute("startingLocations", destService.getStartingLocations());
 		model.addAttribute("endLocations", destService.getEndLocations());
@@ -32,12 +35,15 @@ public class DestinationsController {
 
 	@PostMapping("/destinations")
 	public String postDestinations(@ModelAttribute Destinations dest, Model model, HttpSession session) {
+		User user = User.class.cast(session.getAttribute("user"));
 		destService.updateTable(destService.updateSession(session, dest));
 
+		model.addAttribute("user", user);
 		model.addAttribute("allDestinations", destService.getAllDestinations());
 		model.addAttribute("startingLocations", destService.getStartingLocations());
 		model.addAttribute("endLocations", destService.getEndLocations());
 		model.addAttribute("dest", new Destinations());
+		
 		return "destinations";
 	}
 	
@@ -46,4 +52,5 @@ public class DestinationsController {
 		session.setAttribute("ChoosenDestination", dest);
 		return "redirect:/purchase";
 	}
+	
 }

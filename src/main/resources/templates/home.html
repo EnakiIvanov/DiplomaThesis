@@ -44,6 +44,11 @@
 		background: rgba(255, 255, 255, 0.8);
 		box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
 	}
+	
+	.loggedUser{
+		color:white;
+		text-align: center;
+	}
 	</style>
 </head>
 <body>
@@ -53,8 +58,9 @@
 	     	<div th:if="${user == null}">
 	     		<a href="/login" th:href="@{/login}" class="btn btn-info btn-block">Влизане в профил</a>
 	     	</div>
-	    	 <div th:if="${user != null}">
-	     		<span th:text="${user.firstName}"></span>
+	    	 <div class="loggedUser" th:if="${user != null}">
+	     		<span th:text="${user.firstName} + ' ' + ${user.lastName}"></span>
+	     		<a href="/logout" th:href="@{/logout}" class="btn btn-info">Изход</a>
 	     	</div>
     	</div>
      </div>

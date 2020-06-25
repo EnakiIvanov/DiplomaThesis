@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.BusTicketSystem.ticketSystem.logic.Destinations;
-import com.BusTicketSystem.ticketSystem.logic.DestinationsService;
-import com.BusTicketSystem.ticketSystem.logic.User;
+import com.BusTicketSystem.ticketSystem.logic.destinations.Destinations;
+import com.BusTicketSystem.ticketSystem.logic.destinations.DestinationsService;
+import com.BusTicketSystem.ticketSystem.logic.user.User;
 
 @Controller
 public class HomeController {
@@ -34,9 +34,9 @@ public class HomeController {
 	
 	@PostMapping("/")
 	public String searchDestination(@ModelAttribute Destinations dest, HttpSession session) {
-		 session.setAttribute("goesFrom", dest.getGoesFrom());
-		 session.setAttribute("arrivesTo", dest.getArrivesTo());
-		 session.setAttribute("date", dest.getDate());
+		session.setAttribute("goesFrom", dest.getGoesFrom());
+		session.setAttribute("arrivesTo", dest.getArrivesTo());
+		session.setAttribute("date", dest.getDate());
 		 
 		return "redirect:/destinations";
 	}

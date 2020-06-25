@@ -1,4 +1,4 @@
-package com.BusTicketSystem.ticketSystem.logic;
+package com.BusTicketSystem.ticketSystem.logic.user;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class User {
+	@NonNull
+	private int idUser;
 	@NonNull
 	private String firstName;
 	@NonNull 

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import com.BusTicketSystem.ticketSystem.logic.User;
+import com.BusTicketSystem.ticketSystem.logic.user.User;
 
 @Service
 public class DatabaseAccess {
@@ -19,6 +19,28 @@ public class DatabaseAccess {
 		jdbcTemplate.update("INSERT INTO users(first_name, last_name, email, password, phone) VALUE (?,?,?,?,?)",
 				new Object[] {firstName, lastName, email, password, phone});
 		
+	}
+	
+	public void addTemporaryUser(User user) {
+		jdbcTemplate.update("INSERT INTO temporary_user(first_name, last_name, email, phone) VALUE (?,?,?,?)",
+				new Object[] {user.getFirstName(), user.getLastName(), user.getEmail(), user.getPhone()});
+	}
+	
+	public void addOrder(int idUser, int idDest, int idPayMethd) {
+		jdbcTemplate.update("INSERT INTO orders(id_user, id_destinations, id_payment_method, purchase_date) VALUE (?,?,?,NOW())",
+				new Object[] {idUser, idDest, idPayMethd});
+	}
+	
+	public int getPaymentMethodId(String MethodName) {
+		String sql = "SELECT id_payment_method FROM payment_method WHERE method_name = ?";
+		
+		return jdbcTemplate.queryForObject(sql, new Object[] {MethodName} , Integer.TYPE);
+	}
+	
+	public int getTempUserId(String email) {
+		String sql = "SELECT id_temporary_user FROM temporary_user WHERE email = ?";
+		
+		return jdbcTemplate.queryForObject(sql, new Object[] {email} , Integer.TYPE);
 	}
 	
 	public boolean isEmailExist(String field, String value) {
@@ -34,6 +56,7 @@ public class DatabaseAccess {
 		
 		return jdbcTemplate.queryForObject(sql, new Object[] {email}, (rs, rowNum) ->
 			new User(
+					rs.getInt("id_users"),
 					rs.getString("first_name"),
 					rs.getString("last_name"),
 					rs.getString("email"),
@@ -42,6 +65,12 @@ public class DatabaseAccess {
 				));
 		
 		//return (User) jdbcTemplate.queryForObject(sql, new Object[] {email}, new BeanPropertyRowMapper(User.class));
+	}
+	
+	public List<Map<String, Object>> getAllPaymentMethods() {
+		String sql = "SELECT method_name FROM payment_method";
+		
+		return jdbcTemplate.queryForList(sql);
 	}
 	
 	public List<Map<String, Object>> getAllStartLocations() {
@@ -57,7 +86,7 @@ public class DatabaseAccess {
 	}
 	
 	public List<Map<String, Object>> getAllLocations(String goes_from, String arrives_to, String departure_time) {
-		String sql = "SELECT goes_from, arrives_to, DATE_FORMAT(departure_time, '%H:%i') as departure_time, DATE_FORMAT(hour_of_arrival, '%H:%i') as hour_of_arrival, price \r\n" + 
+		String sql = "SELECT id_destinations, goes_from, arrives_to, DATE_FORMAT(departure_time, '%H:%i') as departure_time, DATE_FORMAT(hour_of_arrival, '%H:%i') as hour_of_arrival, price \r\n" + 
 				"FROM destinations \r\n" + 
 				"WHERE goes_from = ? AND arrives_to = ? AND DATE_FORMAT(departure_time, '%d/%m/%Y') = ? ";
 		return jdbcTemplate.queryForList(sql, new Object[] {goes_from, arrives_to, departure_time});

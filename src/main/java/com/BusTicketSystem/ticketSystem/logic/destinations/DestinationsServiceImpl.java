@@ -1,4 +1,4 @@
-package com.BusTicketSystem.ticketSystem.logic;
+package com.BusTicketSystem.ticketSystem.logic.destinations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +41,9 @@ public class DestinationsServiceImpl implements DestinationsService {
 			
 			item.forEach((k,v) -> {
 				switch(k) {
+				case "id_destinations":
+					dest.setIdDest(Integer.valueOf(String.valueOf(v)));
+					break;
 				case "goes_from": 
 					dest.setGoesFrom(String.valueOf(v));
 					break;

@@ -1,4 +1,4 @@
-package com.BusTicketSystem.ticketSystem.logic;
+package com.BusTicketSystem.ticketSystem.logic.user;
 
 import java.util.Map;
 

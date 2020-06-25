@@ -1,4 +1,4 @@
-package com.BusTicketSystem.ticketSystem.logic;
+package com.BusTicketSystem.ticketSystem.logic.destinations;
 
 import java.util.List;
 
