@@ -10,4 +10,6 @@ public interface UsersService {
 	Map<String, String> getErrors();
 	
 	User getUser(User user);
+	
+	void editUserInfo(User user, String actualUserEmail);
 }

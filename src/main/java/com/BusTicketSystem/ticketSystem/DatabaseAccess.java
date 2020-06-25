@@ -18,7 +18,6 @@ public class DatabaseAccess {
 	public void addUser(String firstName, String lastName, String email, String password, String phone) {
 		jdbcTemplate.update("INSERT INTO users(first_name, last_name, email, password, phone) VALUE (?,?,?,?,?)",
 				new Object[] {firstName, lastName, email, password, phone});
-		
 	}
 	
 	public void addTemporaryUser(User user) {
@@ -39,6 +38,12 @@ public class DatabaseAccess {
 	
 	public int getTempUserId(String email) {
 		String sql = "SELECT id_temporary_user FROM temporary_user WHERE email = ?";
+		
+		return jdbcTemplate.queryForObject(sql, new Object[] {email} , Integer.TYPE);
+	}
+	
+	public int getUserId(String email) {
+		String sql = "SELECT id_users FROM users WHERE email = ?";
 		
 		return jdbcTemplate.queryForObject(sql, new Object[] {email} , Integer.TYPE);
 	}
@@ -92,4 +97,9 @@ public class DatabaseAccess {
 		return jdbcTemplate.queryForList(sql, new Object[] {goes_from, arrives_to, departure_time});
 	}
 
+	public void updateUser(String firstName, String lastName, String email, String phone, int idUser) {
+		String sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone = ? WHERE id_users = ?";
+		
+		jdbcTemplate.update(sql, new Object[] {firstName, lastName, email, phone, idUser});
+	}
 }

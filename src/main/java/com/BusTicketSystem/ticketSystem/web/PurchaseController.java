@@ -37,9 +37,9 @@ public class PurchaseController {
 	
 	@GetMapping("/purchase/payment")
 	public String purchasePayment(@ModelAttribute PaymentMethod paym, HttpSession session, Model model, 
-			@RequestParam(value="methodName",required=false) String methodName,
-			@ModelAttribute User user) {
+			@RequestParam(value="methodName",required=false) String methodName) {
 		Destinations dest = Destinations.class.cast(session.getAttribute("ChoosenDestination"));
+		User user = User.class.cast(session.getAttribute("user"));
 		purchaseService.PopulatePaymentMethodList();	
 		
 		if(methodName.equalsIgnoreCase("кредитна карта")) { 
@@ -47,10 +47,10 @@ public class PurchaseController {
 		}else{
 			paym.setMethodName(methodName);
 		}
-		
-		
+		session.setAttribute("methodName", methodName);
+		model.addAttribute("paymentMethods", purchaseService.getPaymentMethods());
 		model.addAttribute("paym", paym);
-		model.addAttribute("user", user);
+		model.addAttribute("user", user != null ? user : new User());
 		model.addAttribute("dest", dest);
 		
 		return "purchase";

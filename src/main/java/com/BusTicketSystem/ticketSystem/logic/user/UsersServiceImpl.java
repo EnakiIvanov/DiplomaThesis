@@ -63,4 +63,15 @@ public class UsersServiceImpl implements UsersService {
 		User us = dba.getUserInfo(user.getEmail());
 		return us;
 	}
+	
+	@Override
+	public void editUserInfo(User user, String actualUserEmail) {
+		int idUser = dba.getUserId(actualUserEmail);
+		String firstName = user.getFirstName();
+		String lastName = user.getLastName();
+		String email = user.getEmail();
+		String phone = user.getPhone();
+		
+		dba.updateUser(firstName, lastName, email, phone, idUser);
+	}
 }

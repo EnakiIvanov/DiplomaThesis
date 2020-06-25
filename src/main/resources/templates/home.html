@@ -46,7 +46,6 @@
 	}
 	
 	.loggedUser{
-		color:white;
 		text-align: center;
 	}
 	</style>
@@ -59,7 +58,7 @@
 	     		<a href="/login" th:href="@{/login}" class="btn btn-info btn-block">Влизане в профил</a>
 	     	</div>
 	    	 <div class="loggedUser" th:if="${user != null}">
-	     		<span th:text="${user.firstName} + ' ' + ${user.lastName}"></span>
+	     		<a href="/profile" th:href="@{/profile}" th:text="${user.firstName} + ' ' + ${user.lastName}" style="color:white"></a>
 	     		<a href="/logout" th:href="@{/logout}" class="btn btn-info">Изход</a>
 	     	</div>
     	</div>
