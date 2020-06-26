@@ -33,18 +33,10 @@ public class DestinationsController {
 		return "destinations";
 	}
 
-	@PostMapping("/destinations")
-	public String postDestinations(@ModelAttribute Destinations dest, Model model, HttpSession session) {
-		User user = User.class.cast(session.getAttribute("user"));
-		destService.updateTable(destService.updateSession(session, dest));
-
-		model.addAttribute("user", user);
-		model.addAttribute("allDestinations", destService.getAllDestinations());
-		model.addAttribute("startingLocations", destService.getStartingLocations());
-		model.addAttribute("endLocations", destService.getEndLocations());
-		model.addAttribute("dest", new Destinations());
-		
-		return "destinations";
+	@PostMapping("/destinations/search")
+	public String postDestinations(@ModelAttribute Destinations dest, HttpSession session) {
+		destService.updateSession(session, dest);;
+		return "redirect:/destinations";
 	}
 	
 	@PostMapping("/purchase")

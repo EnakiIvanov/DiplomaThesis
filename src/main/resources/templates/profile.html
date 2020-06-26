@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Register</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<style type="text/css">
+	body{
+    background-color: #525252;
+	}
+	.centered-form{
+		margin-top: 60px;
+	}
+	
+	.centered-form .panel{
+		background: rgba(255, 255, 255, 0.8);
+		box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+	}
+	.centered-panel{
+		margin-left: auto;
+		margin-right: auto;
+		width: 43%;
+	}
+	#ordersDiv{
+		margin-left: -60%;
+		margin-right: auto;
+		width: 221%;
+	}
+	</style>
+</head>
+<body>
+    <div class="container">
+        <div class="row centered-form">
+			<div class="centered-panel">
+		    	<div class="panel panel-default">
+	        		 	<div class="panel-heading">
+				    	<h3 class="panel-title">Редактиране на данни</h3>
+				 	</div>
+					<div class="panel-body">
+						<form th:action="@{/profile/edit}" th:object="${user}" method="post" >
+							<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                            <input type="text" th:field="*{firstName}" class="form-control input-sm" placeholder="Име" maxlength="45" required>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" th:field="*{lastName}" class="form-control input-sm" placeholder="Фамилия" maxlength="45" required>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                        	<input type="email" th:field="*{email}" class="form-control input-sm" placeholder="Имейл адрес" maxlength="45" required>
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" th:field="*{phone}" class="form-control input-sm" placeholder="Телефон" minlength="10" maxlength="10" required>
+			    					</div>
+			    				</div>
+			    			</div>
+	    					<input type="submit" value="Промени" class="btn btn-info btn-block">
+			  		  	</form>
+					</div>
+		    	</div>
+				<div class="panel panel-default" id="ordersDiv">
+	        		<div class="panel-heading">
+				    	<h3 class="panel-title">Направени резервации</h3>
+				 	</div>
+					<div class="panel-body">
+						 <table class="table table-hover">
+							 <tbody>
+								 <th:block th:each="order : ${CurrentUserOrders}">
+									 <tr>
+										 <td>
+										 	 <div> 
+											 	<span><b>Тръгва от: </b></span><span th:text="${order.goesFrom}"></span> 
+											 </div>
+										 </td>
+										 <td>
+										 	 <div> 
+											 	<span><b>Пристига в: </b></span><span th:text="${order.arrivesTo}"></span> 
+											 </div>
+										 </td>
+										 <td>
+										 	 <div> 
+											 	<span><b>Час и Дата на резервация: </b></span><span th:text="${order.purchaseDate}"></span> 
+											 </div>
+										 </td>
+								      	 <td>
+										 	 <div class="collapse" th:id="'collapseExample'+${order.idOrder}"> 
+											 	<span><b>Час и дата на заминаване: </b></span><span th:text="${order.departureTime}"></span> 
+											 </div>
+									 	 </td>
+										 <td>
+										 	 <div class="collapse" th:id="'collapseExample'+${order.idOrder}"> 
+												<span><b>Час и дата на пристигане: </b></span><span th:text="${order.hourOfArrival}"></span>
+											 </div>
+										 </td>
+										 <td>
+										 	 <div class="collapse" th:id="'collapseExample'+${order.idOrder}"> 
+												<span><b>Цена: </b></span><span th:text="${#numbers.formatDecimal(order.price, 0, 'COMMA', 2, 'POINT')} + ' лв.'"></span>
+											</div>
+										 </td>
+									 	<td>
+									 		<button class="btn btn-info btn-block" type="button" data-toggle="collapse" th:attr="data-target='#collapseExample'+${order.idOrder}" aria-expanded="false" aria-controls="collapseExample">Детайли</button>
+									 	</td>
+									 	<td>  
+							               <form th:action="@{/profile/delete}" th:object="${order}" method="post">
+							              		<input type="hidden" name="idOrder" th:value="${order.idOrder}">
+							                    <input type="submit" value="Изтрии" class="btn btn-info btn-block">
+							               </form>
+							            </td>
+									 </tr>
+								 </th:block>	     
+							  </tbody>
+						 </table>
+					</div>
+			    </div>
+			</div>
+	    </div>
+    </div>
+</body>
+</html>

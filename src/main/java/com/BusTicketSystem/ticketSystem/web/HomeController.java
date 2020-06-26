@@ -32,7 +32,7 @@ public class HomeController {
 		return "home";
 	}
 	
-	@PostMapping("/")
+	@PostMapping("/searchDestinations")
 	public String searchDestination(@ModelAttribute Destinations dest, HttpSession session) {
 		session.setAttribute("goesFrom", dest.getGoesFrom());
 		session.setAttribute("arrivesTo", dest.getArrivesTo());
