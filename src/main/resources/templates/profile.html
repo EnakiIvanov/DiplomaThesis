@@ -69,6 +69,39 @@
 			  		  	</form>
 					</div>
 		    	</div>
+		    	<div class="panel panel-default">
+	        		 	<div class="panel-heading">
+				    	<h3 class="panel-title">Смяна на парола</h3>
+				 	</div>
+					<div class="panel-body">
+						<form th:action="@{/profile/changePassword}" th:object="${user}" method="post" >
+							<div class="row">
+			    				<div class="col-xs-8 col-md-offset-2">
+			    					<div class="form-group">
+			                            <input type="password" th:field="*{oldPassword}" class="form-control input-sm" placeholder="Стара парола" maxlength="45" required>
+			    						<div style="color: red" th:if="${passwordCheck}" th:text="${passwordCheck}"></div>
+			    					</div>
+			    					<div class="form-group">
+			    						<input type="password" th:field="*{password}" class="form-control input-sm" placeholder="Нова парола" maxlength="45" required>
+			    					</div>
+			    					<div class="form-group">
+			                        	<input type="password" th:field="*{rePassword}" class="form-control input-sm" placeholder="Потвърди нова парола" maxlength="45" required>
+			    						<div style="color: red" th:if="${passwordCheck2}" th:text="${passwordCheck2}"></div>
+			    					</div>
+			    					<div th:if="${success}">
+			    					  <script type="text/javascript" th:inline="javascript">
+									    /*<![CDATA[*/
+									    	alert(/*[[${success}]]*/);
+									    /*]]>*/
+									  </script>
+			    					</div>
+			    					<input type="submit" value="Промени" class="btn btn-info btn-block">
+			    				</div>
+			    			</div>
+	    					
+			  		  	</form>
+					</div>
+		    	</div>
 				<div class="panel panel-default" id="ordersDiv">
 	        		<div class="panel-heading">
 				    	<h3 class="panel-title">Направени резервации</h3>

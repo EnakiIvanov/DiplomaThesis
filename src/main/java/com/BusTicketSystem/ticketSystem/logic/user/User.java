@@ -22,4 +22,5 @@ public class User {
 	@NonNull 
 	private String password;
 	private String rePassword;
+	private String oldPassword;
 }

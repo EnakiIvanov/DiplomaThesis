@@ -103,6 +103,12 @@ public class DatabaseAccess {
 		jdbcTemplate.update(sql, new Object[] {firstName, lastName, email, phone, idUser});
 	}
 	
+	public void updateUserPassword(String password, int idUser) {
+		String sql = "UPDATE users SET password = ? WHERE id_users = ?";
+		
+		jdbcTemplate.update(sql, new Object[] {password, idUser});
+	}
+	
 	public List<Map<String, Object>> getAllOrders(int idUser){
 		String sql = "SELECT o.id_orders, d.goes_from, d.arrives_to, d.departure_time, d.hour_of_arrival, d.price, o.purchase_date " + 
 					 "FROM Orders o JOIN Destinations d ON o.id_destinations = d.id_destinations " + 

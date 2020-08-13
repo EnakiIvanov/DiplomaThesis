@@ -74,4 +74,20 @@ public class UsersServiceImpl implements UsersService {
 		
 		dba.updateUser(firstName, lastName, email, phone, idUser);
 	}
+	
+	@Override
+	public void changeUserPassword(User loggedUser, User newUser) {
+		errors.clear();
+		if(newUser.getOldPassword().equals(loggedUser.getPassword())) {
+			if(newUser.getPassword().equals(newUser.getRePassword())) {
+				dba.updateUserPassword(newUser.getPassword(), loggedUser.getIdUser());
+			}else {
+				System.out.println("Hello2");
+				errors.put("passwordCheck2", "Паролите не съвпадат");
+			}
+		}else {
+			System.out.println("Hello1");
+			errors.put("passwordCheck", "Грешна парола");
+		}
+	}
 }

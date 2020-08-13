@@ -12,4 +12,6 @@ public interface UsersService {
 	User getUser(User user);
 	
 	void editUserInfo(User user, String actualUserEmail);
+	
+	void changeUserPassword(User loggedUser, User newUser);
 }
