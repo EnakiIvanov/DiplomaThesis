@@ -60,6 +60,6 @@ public class PurchaseController {
     public String postPurchase(@ModelAttribute User user, HttpSession session) {
 		Destinations dest = Destinations.class.cast(session.getAttribute("ChoosenDestination"));
 		purchaseService.Purchase(dest, user, session);
-		return "redirect:/";
+		return "redirect:/welcome";
 	}
 }

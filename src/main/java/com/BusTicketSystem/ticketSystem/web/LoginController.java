@@ -30,7 +30,7 @@ public class LoginController {
 		if(usersService.Login(user)) {
 			User us = usersService.getUser(user);
 			session.setAttribute("user", us);
-			return "redirect:/";
+			return "redirect:/welcome";
 		}
 		
 		model.addAttribute("displayError", "Грешен имейл или парола");	

@@ -8,10 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class LogoutController {
 	
-	@RequestMapping("/logout")
-	public String logout(HttpSession session) {
+	@RequestMapping("/logoutHome")
+	public String logoutHome(HttpSession session) {
 		session.removeAttribute("user");
-		return "redirect:/";
+		return "redirect:/home";
+	}
+	
+	@RequestMapping("/logoutWelcome")
+	public String logoutWelcome(HttpSession session) {
+		session.removeAttribute("user");
+		return "redirect:/welcome";
 	}
 
 	@RequestMapping("/logoutDest")

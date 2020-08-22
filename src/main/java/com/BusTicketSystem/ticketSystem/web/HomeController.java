@@ -19,7 +19,7 @@ public class HomeController {
 	@Autowired
 	private DestinationsService destService;
 	
-	@GetMapping("/")
+	@GetMapping("/home")
 	public String home(Model model, HttpSession session) {
 		User user = User.class.cast(session.getAttribute("user"));
 		destService.populateDropdown();

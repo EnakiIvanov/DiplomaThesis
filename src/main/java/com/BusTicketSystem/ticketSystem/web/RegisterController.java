@@ -28,7 +28,7 @@ public class RegisterController {
     public String registerUser(@ModelAttribute User user, Model model, HttpSession session) {
 		if(usersService.Register(user)) {
 			session.setAttribute("user", user);
-			return "redirect:/";
+			return "redirect:/welcome";
 		}
 		model.addAllAttributes(usersService.getErrors());
 		return "register";

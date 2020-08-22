@@ -67,4 +67,10 @@ public class ProfileController {
 		
 		return "redirect:/profile";
 	}
+	
+	@PostMapping("/welcome")
+	public String welcome() {
+		
+		return "redirect:/welcome";
+	}
 }

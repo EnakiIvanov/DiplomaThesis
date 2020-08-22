@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Welcome</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+	<style type="text/css">
+	body{
+    background-color: #525252;
+	}
+	.centered-form{
+		margin-top: 60px;
+	}
+	
+	.centered-form .panel{
+		background: rgba(255, 255, 255, 0.8);
+		box-shadow: rgba(0, 0, 0, 0.3) 20px 20px 20px;
+	}
+	
+	.loggedUser{
+		text-align: center;
+	}
+	</style>
+</head>
+<body>
+    <div class="container">
+     <div class="row centered-form">
+     	<div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+	     	<div th:if="${user == null}">
+	     		<a href="/login" th:href="@{/login}" class="btn btn-info btn-block">Влизане в профил</a>
+	     	</div>
+	    	 <div class="loggedUser" th:if="${user != null}">
+	     		<a href="/profile" th:href="@{/profile}" th:text="${user.firstName} + ' ' + ${user.lastName}" style="color:white"></a>
+	     		<a href="/logoutWelcome" th:href="@{/logoutWelcome}" class="btn btn-info">Изход</a>
+	     	</div>
+    	</div>
+     </div>
+        <div class="row centered-form">
+	        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+	        	<div class="panel panel-default">
+        			<div class="panel-heading">
+			    		<h3 class="panel-title">Избор на превозно средство</h3>
+			 		</div>
+			 			<div class="panel-body">
+				 			<div class="form-group">
+				 				<input type="submit" value="Билет за самолет" class="btn btn-info btn-block">
+				 			</div>
+				 			<div class="form-group">
+					    		<form action="#" th:action="@{/bus}" method="post" >	    					
+					    			<input type="submit" value="Билет за автобус" class="btn btn-info btn-block">
+					    		</form>			 			
+				 			</div>
+				 			<div class="form-group">
+				    			<input type="submit" value="Билет за влак" class="btn btn-info btn-block">				 			
+				 			</div>
+			    		</div>
+		    	</div>
+	    	</div>
+    	</div>
+    </div>
+</body>
+</html>

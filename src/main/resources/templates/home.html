@@ -59,7 +59,7 @@
 	     	</div>
 	    	 <div class="loggedUser" th:if="${user != null}">
 	     		<a href="/profile" th:href="@{/profile}" th:text="${user.firstName} + ' ' + ${user.lastName}" style="color:white"></a>
-	     		<a href="/logout" th:href="@{/logout}" class="btn btn-info">Изход</a>
+	     		<a href="/logoutHome" th:href="@{/logoutHome}" class="btn btn-info">Изход</a>
 	     	</div>
     	</div>
      </div>
