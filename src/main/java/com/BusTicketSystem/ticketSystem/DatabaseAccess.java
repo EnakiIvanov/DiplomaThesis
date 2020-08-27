@@ -30,6 +30,11 @@ public class DatabaseAccess {
 				new Object[] {idUser, idDest, idPayMethd});
 	}
 	
+	public void addDestinations(String goesFrom, String arrivesTo, String departureTime, String hourOfArrival, String price) {
+		jdbcTemplate.update("INSERT INTO destinations(goes_from, arrives_to, departure_time, hour_of_arrival, price) VALUE (?,?,?,?,?)",			
+				new Object[] {goesFrom, arrivesTo, departureTime, hourOfArrival, price});
+	}
+	
 	public int getPaymentMethodId(String MethodName) {
 		String sql = "SELECT id_payment_method FROM payment_method WHERE method_name = ?";
 		

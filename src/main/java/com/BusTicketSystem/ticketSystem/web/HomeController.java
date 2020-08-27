@@ -27,7 +27,7 @@ public class HomeController {
 		model.addAttribute("user", user);
 		model.addAttribute("startingLocations", destService.getStartingLocations());
 		model.addAttribute("endLocations", destService.getEndLocations());
-		model.addAttribute("dest", new Destinations());	
+		model.addAttribute("dest", new Destinations());
 		
 		return "home";
 	}
