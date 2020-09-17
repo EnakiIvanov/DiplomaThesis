@@ -24,9 +24,9 @@ public class OrdersServiceImpl implements OrdersService {
 	@Override
 	public void getUserOrders(User user) {
 		int idUser = user.getIdUser();
-		currentUserOrders.clear();
+		currentUserOrders.clear();		
 		
-		List<Map<String, Object>> current_user_orders = dba.getAllOrders(idUser);
+		List<Map<String, Object>> current_user_orders = dba.getAllOrders(idUser);	
 		
 		current_user_orders.forEach(item -> {
 			Orders order = new Orders();

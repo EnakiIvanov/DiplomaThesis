@@ -46,12 +46,24 @@
 	}
 	
 	.searching-panel{
-	margin: 60px 840px 0px 120px;
+	/*margin: 4% 72% 1% 10%;*/
+		margin-left: 11%;
+   		float: left;
+    	width: fit-content;
+	}
+	
+	.div-destinations{
+	/*margin: -23% 20% 0% 32%;*/
+		margin-right: 15%;
+   		float: right;
+    	width: fit-content;
 	}
 	
 	.table-destinations{
-	margin: -271px 220px 0px 375px;
+	margin: auto;
+	width:99%;
 	}
+	
 	.loggedUser{
 		color:white;
 		text-align: center;
@@ -80,34 +92,34 @@
 		 			<div class="panel-body">
 			    		<form th:action="@{/destinations/search}" th:object="${dest}" method="post">	                        
 	    					<div class="form-group">
-	                        	<select th:field="*{GoesFrom}" class="form-control">
-							    <option value="0">Тръгва от</option>
+	                        	<select th:field="*{GoesFrom}" class="form-control" required>
+							    <option value="">Тръгва от</option>
 							    <option th:each="startLoc : ${startingLocations}" th:value="${startLoc}" th:text="${startLoc}"></option>
 							    </select>
 	    					</div>
 	    					<div class="form-group">
-	    						<select th:field="*{ArrivesTo}" class="form-control">
-							    <option value="0">Пристига в</option>
+	    						<select th:field="*{ArrivesTo}" class="form-control" required>
+							    <option value="">Пристига в</option>
 							    <option th:each="endLoc : ${endLocations}" th:value="${endLoc}" th:text="${endLoc}"></option>
 							    </select>
 	    					</div>
 	    					<div class="form-group">
-      								 <input class="form-control" th:id="date" th:name="Date" placeholder="Дата на заминаване" th:type="text" th:field="*{Date}" autocomplete="off"/>
+      							<input class="form-control" th:id="date" th:name="Date" placeholder="Дата на заминаване" th:type="text" th:field="*{Date}" autocomplete="off" required/>
 	    					</div>
 			    			<input type="submit" value="Търси" class="btn btn-info btn-block">
 				    	</form>
 		    		</div>
 		    	</div>
 	    	</div>
-    		<div class="table-destinations">
+    		<div class="div-destinations">
 	        	<div class="panel panel-default">
 	        		<div class="panel-heading">
 			    		<h3 class="panel-title">Дестинации</h3>
 			 		</div>
 			 		<div class="panel-body">
 	    					<div class="form-group">
-	                             <div class="row col-md-7 table-responsive">
-								  <table class="table table-hover">
+	                             <div class="table-responsive">
+								  <table class="table-destinations">
 									  <thead>
 									    <tr>
 									      <th scope="col">Тръгва от </th>

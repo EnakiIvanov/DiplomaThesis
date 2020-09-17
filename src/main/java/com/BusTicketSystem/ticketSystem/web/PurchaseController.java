@@ -44,7 +44,9 @@ public class PurchaseController {
 		
 		if(methodName.equalsIgnoreCase("кредитна карта")) { 
 			paym.setMethodName("CreditCard");
-		}else{
+		}else if(methodName.equalsIgnoreCase("наложен платеж")){
+			paym.setMethodName("CashOnDelivery");
+		}else {
 			paym.setMethodName(methodName);
 		}
 		session.setAttribute("methodName", methodName);

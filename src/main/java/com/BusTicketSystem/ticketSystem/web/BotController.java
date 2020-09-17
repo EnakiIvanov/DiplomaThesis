@@ -15,7 +15,7 @@ public class BotController {
 	@RequestMapping("/populateDatabase")
 	public String populateDB() {
 		bot.getInfo();
-		//bot.populateDB();
+		bot.populateDB();
 		return "Database successful populated";
 	}
 }

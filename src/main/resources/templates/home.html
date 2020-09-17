@@ -72,19 +72,19 @@
 			 			<div class="panel-body">
 				    		<form action="#" th:action="@{/searchDestinations}" th:object="${dest}" method="post" >	                        
 		    					<div class="form-group">
-		                        	<select th:field="*{GoesFrom}" class="form-control">
-								    <option value="0">Тръгва от</option>
+		                        	<select th:field="*{GoesFrom}" class="form-control" required>
+								    <option value="">Тръгва от</option>
 								    <option th:each="startLoc : ${startingLocations}" th:value="${startLoc}" th:text="${startLoc}"></option>
 								    </select>
 		    					</div>
 		    					<div class="form-group">
-		    						<select th:field="*{ArrivesTo}" class="form-control">
-								    <option value="0">Пристига в</option>
+		    						<select th:field="*{ArrivesTo}" class="form-control" required>
+								    <option value="">Пристига в</option>
 								    <option th:each="endLoc : ${endLocations}" th:value="${endLoc}" th:text="${endLoc}"></option>
 								    </select>
 		    					</div>
 		    					<div class="form-group">
-       								 <input class="form-control" th:id="date" th:name="Date" placeholder="Дата на заминаване" th:type="text" th:field="*{Date}" autocomplete="off"/>
+       								 <input class="form-control" th:id="date" th:name="Date" placeholder="Дата на заминаване" th:type="text" th:field="*{Date}" autocomplete="off" required/>
 		    					</div>
 				    			<input type="submit" value="Търси" class="btn btn-info btn-block">
 				    		</form>

@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -72,9 +74,7 @@ public class Bot {
 	    		List<WebElement> activeDays = driver.findElements(By.xpath("//*[@id='ctl00_ctl00_cphBody_cphBody_searchResults' or @id='ctl00_ctl00_cphBody_cphBody_additionalResults']/div[1]/div[3]/table/tbody/tr["+j+"]/td[@class='active_days']/span"));
 		    	
 	    		for(WebElement wb : activeDays){
-	    			String datte = getDaysFromTheCurrentWeek()[getDayNumByName(wb.getText())];   
-	    			// https://www.baeldung.com/java-string-to-timestamp
-	    			//System.out.println(Timestamp.valueOf(datte +" "+ departureTime+":00") + " ");
+	    			String datte = getDaysFromTheCurrentWeek()[getDayNumByName(wb.getText())];
 			    	String datanazaminavane = datte +" "+ departureTime+":00";
 			    	String datapristigane = datte +" "+ hourOfArrival+":00";
 	    			lists.add(Arrays.asList(goesFrom, arrivesTo, datanazaminavane, datapristigane, price));
@@ -86,6 +86,7 @@ public class Bot {
 	}
 	
 	public void populateDB() {
+		lists = lists.stream().distinct().collect(Collectors.toList());
 		for(int i = 0; i < lists.size(); i++) {
 			String goesFrom = lists.get(i).get(0).toString();
 			String arrivesTo = lists.get(i).get(1).toString();

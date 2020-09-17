@@ -26,8 +26,13 @@ public class DatabaseAccess {
 	}
 	
 	public void addOrder(int idUser, int idDest, int idPayMethd) {
-		jdbcTemplate.update("INSERT INTO orders(id_user, id_destinations, id_payment_method, purchase_date) VALUE (?,?,?,NOW())",
+		jdbcTemplate.update("INSERT INTO orders(id_users, id_destinations, id_payment_method, purchase_date) VALUE (?,?,?,NOW())",
 				new Object[] {idUser, idDest, idPayMethd});
+	}
+	
+	public void addOrderTempUser(int idDest, int idPayMethd, int idUser) {
+		jdbcTemplate.update("INSERT INTO orders(id_destinations, id_payment_method, purchase_date, id_temporary_user) VALUE (?,?,NOW(),?)",
+				new Object[] {idDest, idPayMethd, idUser});
 	}
 	
 	public void addDestinations(String goesFrom, String arrivesTo, String departureTime, String hourOfArrival, String price) {
@@ -117,7 +122,7 @@ public class DatabaseAccess {
 	public List<Map<String, Object>> getAllOrders(int idUser){
 		String sql = "SELECT o.id_orders, d.goes_from, d.arrives_to, d.departure_time, d.hour_of_arrival, d.price, o.purchase_date " + 
 					 "FROM Orders o JOIN Destinations d ON o.id_destinations = d.id_destinations " + 
-					 "WHERE o.id_user = ?";
+					 "WHERE o.id_users = ?";
 		
 		return jdbcTemplate.queryForList(sql, new Object[] {idUser});
 	}

@@ -31,7 +31,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		if(us == null){
 			dba.addTemporaryUser(user);
 			int tempUserId = dba.getTempUserId(user.getEmail());
-			dba.addOrder(tempUserId, dest.getIdDest(), idPaymentMethod);
+			dba.addOrderTempUser(dest.getIdDest(), idPaymentMethod, tempUserId);
 		}else if(us != null) {
 			dba.addOrder(us.getIdUser(), dest.getIdDest(), idPaymentMethod);
 		}

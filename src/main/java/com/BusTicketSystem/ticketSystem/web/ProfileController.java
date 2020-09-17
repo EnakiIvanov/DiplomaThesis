@@ -37,12 +37,14 @@ public class ProfileController {
 	}
 	
 	@PostMapping("/profile/edit")
-	public String editProfile(@ModelAttribute User user, Model model, HttpSession session) {
+	public String editProfile(@ModelAttribute User user, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		User loggedUser = User.class.cast(session.getAttribute("user"));
 		usersService.editUserInfo(user, loggedUser.getEmail());
 		User EditedUser = usersService.getUser(user);
 		session.setAttribute("user", EditedUser);
-
+		
+		redirectAttributes.addFlashAttribute("success", "Данните са променени успешно!");
+		
 		return "redirect:/profile";
 	}
 	
