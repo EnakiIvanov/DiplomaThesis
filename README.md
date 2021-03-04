@@ -1,6 +1,6 @@
 # Diploma Thesis
 ## Introduction
-Web application for ticket reservetion. Made for educational purpose.
+Web application for ticket reservation. Made for educational purpose.
 
 ## Technologies
 - HTML 5;
